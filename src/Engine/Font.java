@@ -128,9 +128,9 @@ public class Font {
   }
   
   public Vector2 measureFont(String str) {
-    Vector2 v = new Vector2();
-    this.measureFont(str, v);
-    return v;
+  	Vector2 v = new Vector2();
+  	this.measureFont(str,v);
+  	return v;
   }
   
   public void measureFont(String str, Vector2 v) {
@@ -155,7 +155,7 @@ public class Font {
       dx += w + this.getDefaultCharacterSpacing();
     }
     
-    v.setCoordinates(dx, dy);
+    v.setCoordinates(dx,dy);
   }
   
   private Character findCharacter(int character) {
