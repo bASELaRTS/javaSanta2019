@@ -50,4 +50,21 @@ public class EntityManager {
       o = n;    
     }
   }
+  
+  public Entity find(String key) {
+    LinkedListObject o,n;
+    Entity e;
+    
+    o = this.m_list.getFirst();
+    while (o!=null) {
+      n = o.getNext();
+      e = (Entity)o.getObject();
+      if (e.getKey().equals(key)) {
+      	return e;
+      }
+      o = n;    
+    }
+  	
+  	return null;
+  }
 }

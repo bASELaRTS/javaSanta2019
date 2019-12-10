@@ -25,10 +25,14 @@ public class SceneMain extends GameScene {
     tilemap.setSize(engine.getWidth(), engine.getHeight());
     this.loadTiles("data/tiles/Tiles.layout", "data/tiles/Tiles.png", tilemap.getTiles());
     tilemap.load(new java.io.File("data/tilemap01.txt"));
-    //tilemap.create(20,15,16,16);
-    //tilemap.fill(-1);
     this.m_entities.add(tilemap);
-    //tilemap.save(new java.io.File("data/tilemap01.txt"));
+
+    Map map;
+    map = new Map();
+    map.setVisible(false);
+    map.setKey("collisionmap");
+    map.load(new java.io.File("data/collisionmap01.txt"));
+    this.m_entities.add(map);
     
     int i;   
     for(i=0;i<100;i++) {
@@ -36,6 +40,8 @@ public class SceneMain extends GameScene {
       snowFlake.getPosition().setCoordinates(Math.random()*engine.getWidth(),Math.random()*engine.getHeight());
       this.m_entities.add(snowFlake);
     }
+    
+    this.m_entities.add(new Player(engine));
   }
   
   private void loadTiles(String flayout, String fimage, Vector<BufferedImage> images) {
@@ -91,4 +97,6 @@ public class SceneMain extends GameScene {
   	engine.getGraphics().drawImage((int)((engine.getWidth()-v.x)*0.5)-10, (int)((engine.getHeight()-v.y)*0.5) + 1, 8, 8, this.m_heart);
   	engine.getGraphics().drawImage((int)((engine.getWidth()-v.x)*0.5)+(int)v.x+2, (int)((engine.getHeight()-v.y)*0.5) + 1, 8, 8, this.m_heart);
   }
+  
+  public EntityManager getEntities() {return this.m_entities;}
 }
