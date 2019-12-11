@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import Engine.Entity;
 import Engine.GameGraphics;
+import Engine.Vector2;
 
 public class Map extends Entity {
 	private String m_name;
@@ -147,17 +148,9 @@ public class Map extends Entity {
 			for(i=0;i<w;i++) {
 				tile = this.getTile(i, j);
 				this.paintTile(graphics, px, py, tw, th, tile);
-				px+=tw;
-				
-				if (px>this.getWidth()) {
-					i=w;
-				}
+				px+=tw;				
 			}
-			py+=th;
-			
-			if (py>this.getHeight()) {
-				j=h;
-			}
+			py+=th;			
 		}
 	}
 	

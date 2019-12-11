@@ -6,7 +6,9 @@ public class Santa2019 extends GameEngine {
   private Font[] m_fonts;
   
   public Santa2019() {
-    super("Santa2019",320,240);
+    super("Santa2019",160,120);
+    
+    this.setZoom(2.0);
     
     this.m_fonts = new Font[1];    
     this.m_fonts[0] = new Font();

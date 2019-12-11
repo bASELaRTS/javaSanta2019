@@ -8,18 +8,23 @@ import Engine.*;
 
 public class SceneMain extends GameScene {
 	private EntityManager m_entities;
-	
+	private Camera m_camera;
 	private BufferedImage m_heart;
   
   public SceneMain(GameEngine engine) {
     super(engine);
     
+    // initialize objects
     this.m_entities = new EntityManager(engine);
+    this.m_camera = new Camera(engine);
     
+    // load images
+    this.m_heart = GameGraphics.loadImage("data/heart8x8.png");
+
+    // add sky
     this.m_entities.add(new SkyBackground(engine));
     
-    this.m_heart = GameGraphics.loadImage("data/heart8x8.png");
-    
+    // add tilemap
     TileMap tilemap;
     tilemap = new TileMap();
     tilemap.setSize(engine.getWidth(), engine.getHeight());
@@ -27,6 +32,7 @@ public class SceneMain extends GameScene {
     tilemap.load(new java.io.File("data/tilemap01.txt"));
     this.m_entities.add(tilemap);
 
+    // add collsionap
     Map map;
     map = new Map();
     map.setVisible(false);
@@ -34,6 +40,7 @@ public class SceneMain extends GameScene {
     map.load(new java.io.File("data/collisionmap01.txt"));
     this.m_entities.add(map);
     
+    // add snow flakes
     int i;   
     for(i=0;i<100;i++) {
     	SnowFlake snowFlake = new SnowFlake();
@@ -41,6 +48,7 @@ public class SceneMain extends GameScene {
       this.m_entities.add(snowFlake);
     }
     
+    // add player
     this.m_entities.add(new Player(engine));
   }
   
@@ -72,6 +80,10 @@ public class SceneMain extends GameScene {
   
   public void update() {
   	this.m_entities.update();
+  	
+  	if (this.getEngine().getInput().getKeyboard().getState(InputKeyboard.KEY_ESCAPE)) {
+  	  this.getEngine().quit();
+  	}
   }
   
   public void paint() {
@@ -82,21 +94,27 @@ public class SceneMain extends GameScene {
   	String str;
   	Font font = engine.getFont(0);
 
-  	str = "" + engine.getTimer().getFPS();
-  	font.measureFont(str,v);
-  	font.drawFont(engine.getWidth() - (int)(v.x) - 2, 2, engine.getGraphics(), str);
-
-  	str = "" + this.m_entities.count();
-  	font.measureFont(str,v);
-  	font.drawFont(engine.getWidth() - (int)(v.x) - 2, 12, engine.getGraphics(), str);
-
   	str = "Merry Christmas";
   	font.measureFont(str,v);
   	font.drawFont((int)((engine.getWidth()-v.x)*0.5), (int)((engine.getHeight()-v.y)*0.5), engine.getGraphics(), str);
   	
   	engine.getGraphics().drawImage((int)((engine.getWidth()-v.x)*0.5)-10, (int)((engine.getHeight()-v.y)*0.5) + 1, 8, 8, this.m_heart);
   	engine.getGraphics().drawImage((int)((engine.getWidth()-v.x)*0.5)+(int)v.x+2, (int)((engine.getHeight()-v.y)*0.5) + 1, 8, 8, this.m_heart);
+
+    str = "" + engine.getTimer().getFPS();
+    font.measureFont(str,v);
+    font.drawFont(engine.getWidth() - (int)(v.x) - 2, 2, engine.getGraphics(), str);
+
+    str = "" + this.m_entities.count();
+    font.measureFont(str,v);
+    font.drawFont(engine.getWidth() - (int)(v.x) - 2, 12, engine.getGraphics(), str);
+
+    v.setVector(this.getCamera().getPosition());
+    str = "Cam:(" + v.x + ";" + v.y + ")";
+    font.measureFont(str,v);
+    font.drawFont(engine.getWidth() - (int)(v.x) - 2, 22, engine.getGraphics(), str);
   }
   
   public EntityManager getEntities() {return this.m_entities;}
+  public Camera getCamera() {return this.m_camera;}
 }

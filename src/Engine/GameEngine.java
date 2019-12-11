@@ -6,6 +6,7 @@ public class GameEngine {
   private int m_height;
   private boolean m_quit;
   private boolean m_resizable;
+  private double m_zoom;
   
   private GameGraphics m_graphics;
   private Timer m_timer;
@@ -18,6 +19,7 @@ public class GameEngine {
     this.setWidth(width);
     this.setHeight(height);
     this.setResizable(false);
+    this.setZoom(1.0);
     
     this.m_timer = new Timer();
     this.m_input = new Input();
@@ -60,6 +62,8 @@ public class GameEngine {
   public int getHeight() {return this.m_height;}
   public void setResizable(boolean resize) {this.m_resizable=resize;}
   public boolean getResizable() {return this.m_resizable;}
+  public void setZoom(double zoom) {this.m_zoom=zoom;}
+  public double getZoom() {return this.m_zoom;}
   public Timer getTimer() {return this.m_timer;}
   public Input getInput() {return this.m_input;}
   public GameGraphics getGraphics() {return this.m_graphics;}

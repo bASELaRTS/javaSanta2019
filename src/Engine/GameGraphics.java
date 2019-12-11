@@ -47,7 +47,9 @@ public class GameGraphics {
   }
   
   public void drawImage(int x, int y, int width, int height, BufferedImage img) {
-    this.m_graphics.drawImage(img, x, y, width, height, null);
+    if (((x+width)>0)&&(x<this.m_width)&&((y+height)>0)&&(y<this.m_height)) {
+      this.m_graphics.drawImage(img, x, y, width, height, null);
+    }
   }
 
   public void drawRect(int x, int y, int width, int height, Color color) {

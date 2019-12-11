@@ -25,8 +25,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
     
     this.setGameEngine(engine);
     
-    int w = engine.getWidth();
-    int h = engine.getHeight();
+    int w = (int)(engine.getWidth()*engine.getZoom());
+    int h = (int)(engine.getHeight()*engine.getZoom());
     this.setMinimumSize(new Dimension(w,h));
     this.setPreferredSize(new Dimension(w,h));
     this.setFocusable(true);
@@ -48,8 +48,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, MouseLis
       BufferedImage img;
       int w,h;
       img = this.m_engine.getGraphics().getImage();
-      w = this.m_engine.getGraphics().getWidth();
-      h = this.m_engine.getGraphics().getHeight();
+      w = (int)(this.m_engine.getGraphics().getWidth()*this.m_engine.getZoom());
+      h = (int)(this.m_engine.getGraphics().getHeight()*this.m_engine.getZoom());
       g.drawImage(img,0,0,w,h,null);
     }
   }

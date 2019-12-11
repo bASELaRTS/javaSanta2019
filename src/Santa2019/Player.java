@@ -122,27 +122,13 @@ public class Player extends Entity {
     	speed.y = 0;
     	this.m_state = Player.Idle;
     }
-        
-    if (position.x<0) {
-    	position.x=0;
-    	speed.x=0;
-    }
-    if (position.x>(engine.getWidth()-this.getWidth())) {
-    	position.x=(engine.getWidth()-this.getWidth());
-    	speed.x = 0;
-    }
-    if (position.y<0) {
-    	position.y = 0;
-    	speed.y = 0;
-    }
-    if (position.y>(engine.getHeight()-this.getHeight())) {
-    	position.y = engine.getHeight()-this.getHeight();
-    	speed.y = 0;
-    	this.m_state = Player.Idle;
-    }
-    
+            
     this.getSpeed().setVector(speed);
     this.getPosition().setVector(position);
+    
+    // set camera
+    v.setCoordinates(engine.getWidth()*0.5,engine.getHeight()*0.5);
+    Vector2.subtract(position, v, scene.getCamera().getPosition());
   }
   
   public void paint(GameGraphics graphics) {
@@ -153,7 +139,9 @@ public class Player extends Entity {
     
     //graphics.fillRect(x, y, w, h, Color.white);
     BufferedImage image = this.m_images.elementAt(this.m_frame);
-    graphics.drawImage(x, y, w, h, image);
+    //graphics.drawImage(x, y, w, h, image);
+    
+    ((SceneMain)((Santa2019)this.getGameEngine()).getSceneManager().getActiveScene()).getCamera().drawImage(image, x, y, w, h, graphics);
   }
   
   public Vector2 getPosition() {return this.m_position;}

@@ -9,7 +9,7 @@ public class InputKeyboard {
   public static int KEY_DOWN = 40;  
   public static int KEY_SPACE = 32;
   public static int KEY_ENTER = 10;
-  public static int KEY_ESCAPE = 27;
+  public static int KEY_ESCAPE = 27;  
 
   private Vector<Key> m_keys;
   
